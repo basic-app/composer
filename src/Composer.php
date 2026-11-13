@@ -47,13 +47,13 @@ class Composer extends LibraryInstaller
         }
     }
 
-    protected static function setPermission($files)
+    protected static function setPermissions($files)
     {
-        foreach($files as $file => $permission)
+        foreach($files as $file => $permissions)
         {
-            chmod($file, octdec($permission));  
+            chmod($file, octdec($permissions));  
             
-            echo '  - Set ' . $permission . ' permissions to ' . $file . "\n";
+            echo '  - Set ' . $permissions . ' permissions to ' . $file . "\n";
         }
     }
 }
