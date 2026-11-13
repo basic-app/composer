@@ -1,0 +1,9 @@
+{
+    "name": "basic-app/composer",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BasicApp\\Composer\\": "src"
+        }
+    }
+}
