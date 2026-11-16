@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author Basic App Dev Team
  * @license MIT
  */
+
 namespace BasicApp\Composer;
 
 use Composer\Installer\LibraryInstaller;
@@ -11,7 +13,7 @@ use Composer\Installer\LibraryInstaller;
 class Composer extends LibraryInstaller
 {
     public static function postCreateProject($event)
-    {        
+    {
         static::runCommands($event, __METHOD__);
     }
 
@@ -28,11 +30,9 @@ class Composer extends LibraryInstaller
     protected static function runCommands($event, $extraKey)
     {
         $params = $event->getComposer()->getPackage()->getExtra();
-  
-        if (isset($params[$extraKey]) && is_array($params[$extraKey]))
-        {
-            foreach ($params[$extraKey] as $method => $args)
-            {
+
+        if (isset($params[$extraKey]) && is_array($params[$extraKey])) {
+            foreach ($params[$extraKey] as $method => $args) {
                 call_user_func_array([__CLASS__, $method], (array) $args);
             }
         }
@@ -40,8 +40,7 @@ class Composer extends LibraryInstaller
 
     protected static function copy($files)
     {
-        foreach($files as $source => $target)
-        {
+        foreach ($files as $source => $target) {
             copy($source, $target);
 
             echo '  - Copy ' . $source . ' to ' . $target . "\n";
@@ -50,10 +49,9 @@ class Composer extends LibraryInstaller
 
     protected static function setPermissions($files)
     {
-        foreach($files as $file => $permissions)
-        {
-            chmod($file, octdec($permissions));  
-            
+        foreach ($files as $file => $permissions) {
+            chmod($file, octdec($permissions));
+
             echo '  - Set ' . $permissions . ' permissions to ' . $file . "\n";
         }
     }
